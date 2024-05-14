@@ -112,9 +112,10 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
     SpatialFeaturePlot(st_dat_pred,features = c("region","relative_distance"))
 
 ## Built With
-  - [Python](https://www.python.org/) 
-  - [R](https://www.contributor-covenant.org/](https://www.r-project.org/about.html))
+  - [Python](https://www.python.org/)
   - [PyTorch](https://pytorch.org/)
+  - [R](https://www.contributor-covenant.org/](https://www.r-project.org/about.html))
+
 
 ## Lab website
 
