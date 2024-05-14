@@ -36,7 +36,7 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
     
 ### Run TLSformer 
 
-Load package and demo data
+1.Load package and demo data
 
     library(Seurat)
     library(TLSformer)
@@ -44,7 +44,7 @@ Load package and demo data
     st_dat_train <- readRDS("~/MLTLS_package/demo_data/bc_st_demo_data.RDS")
     st_dat_pred <- readRDS("~/MLTLS_package/demo_data/melanoma_st_demo_data.rds")
 
-Generate sentences
+2.Set parameters
 
     # Parameters
     sen_len = 260
@@ -58,6 +58,8 @@ Generate sentences
     train_K = 5
     train_Q = 5
     train_episodes = 300
+
+3.Generate sentences
     
     # training data
     st_dat_train <- generate_sentences(
@@ -79,7 +81,7 @@ Generate sentences
       envir_path = envir_path
     )
 
-Training TLSformer
+4.Training TLSformer
 
     st_dat_train <- run_tlsformer_train(
         seu_obj = st_dat_train,
@@ -94,7 +96,7 @@ Training TLSformer
         envir_path = envir_path
     )
 
-Use trained TLSformer to predict
+5.Use trained TLSformer to predict
 
     # run prediction
     st_dat_pred <- run_tlsformer_pred(
