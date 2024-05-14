@@ -41,12 +41,12 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
     library(Seurat)
     library(TLSformer)
     library(reticulate)
+    library(tidyverse)
     st_dat_train <- readRDS("~/MLTLS_package/demo_data/bc_st_demo_data.RDS")
     st_dat_pred <- readRDS("~/MLTLS_package/demo_data/melanoma_st_demo_data.rds")
 
 2.Set parameters
 
-    # Parameters
     sen_len = 260
     save_inseu = TRUE
     genes_representor = "~/MLTLS_package/demo_data/pretrained_models_rank260/genelist.txt"
@@ -61,7 +61,7 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
 
 3.Generate sentences
     
-    # training data
+    # Training data
     st_dat_train <- generate_sentences(
       seu_obj = st_dat_train,
       sen_len = sen_len,
@@ -71,7 +71,7 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
       envir_path = envir_path
     )
     
-    # predicton data
+    # Predicton data
     st_dat_pred <- generate_sentences(
       seu_obj = st_dat_pred,
       sen_len = sen_len,
@@ -82,7 +82,8 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
     )
 
 4.Training TLSformer
-
+    
+    # Training
     st_dat_train <- run_tlsformer_train(
         seu_obj = st_dat_train,
         pretrained_model = pretrained_model,
@@ -98,7 +99,7 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
 
 5.Use trained TLSformer to predict
 
-    # run prediction
+    # Run prediction
     st_dat_pred <- run_tlsformer_pred(
                         seu_obj = st_dat_pred,
                         pretrained_model_path = pretrained_model_path,
