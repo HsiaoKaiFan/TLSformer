@@ -26,6 +26,15 @@ This path will be the finally used python environment path, and then download th
 - [pre-trained gene word encoder]()
 - [demo data](https://drive.google.com/drive/folders/1DZJ-f_RjpnRUszXNKm_KRGXpbHcwsEBK?usp=drive_link)
 
+Install TLSformer by devtools in R
+
+    devtools::install_github("Jinglab/TLSformer")
+    
+Or install locally by download this repository after unzip the downloaded file
+
+    devtools::install_github("Jinglab/TLSformer")
+    
+
 ### Run TLSformer 
 
 Load package and demo data
