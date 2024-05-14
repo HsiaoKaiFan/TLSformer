@@ -12,9 +12,9 @@ This is a mini example shows how to use TLSformer to predict TLS.
 
 ### Installing
 
-Before you use TLSformer, you can firstly prepare a operating environment by using conda.
+Before you use TLSformer, you can firstly prepare a conda environment.
 
-Using yaml file to create TLSformer operating environment
+Using yaml file to create TLSformer conda environment
 
     conda env create -f tlsformer_env.yml
 
@@ -22,37 +22,87 @@ And after successfully creating the environment, you can find the python of this
 
     /home/xfan/miniconda3/envs/TLSformer_env/bin
 
-This path will be the finally used python environment path
+This path will be the finally used python environment path, and then download the 10x Visium breast cancer pre-trained gene word encoder and demo data in the Google Cloud. The saved path of this pre-train gene word encoder will be used in the next work flow.
+- [pre-trained gene word encoder]()
+- [demo data](https://drive.google.com/drive/folders/1DZJ-f_RjpnRUszXNKm_KRGXpbHcwsEBK?usp=drive_link)
 
+### Run TLSformer 
 
-## Running the tests
+Load package and demo data
 
-Explain how to run the automated tests for this system
+    library(Seurat)
+    library(TLSformer)
+    library(reticulate)
+    st_dat_train <- readRDS("~/MLTLS_package/demo_data/bc_st_demo_data.RDS")
+    st_dat_pred <- readRDS("~/MLTLS_package/demo_data/melanoma_st_demo_data.rds")
 
-### Sample Tests
+Generate sentences
 
-Explain what these tests test and why
+    # Parameters
+    sen_len = 260
+    save_inseu = TRUE
+    genes_representor = "~/MLTLS_package/demo_data/pretrained_models_rank260/genelist.txt"
+    envir_path = "/home/xfan/miniconda3/envs/tlsformer_env/bin/python"
+    pretrained_model = "TLSformer_BERT"
+    pretrained_model_path = "~/MLTLS_package/demo_data/pretrained_models_rank260/"
+    save_checkpoint_path = "~/MLTLS_package/demo_data/"
+    batch_size = 2
+    train_K = 5
+    train_Q = 5
+    train_episodes = 300
+    
+    # train data
+    st_dat_train <- generate_sentences(
+      seu_obj = st_dat_train,
+      sen_len = sen_len,
+      region_info = st_dat_train@meta.data$region,
+      save_inseu = save_inseu,
+      genes_representor = genes_representor,
+      envir_path = envir_path
+    )
+    
+    # predicton data
+    st_dat_pred <- generate_sentences(
+      seu_obj = st_dat_pred,
+      sen_len = sen_len,
+      region_info = st_dat_pred@meta.data$region,
+      save_inseu = save_inseu,
+      genes_representor = genes_representor,
+      envir_path = envir_path
+    )
 
-    Give an example
+Training TLSformer
 
-### Style test
+    st_dat_train <- run_tlsformer_train(
+        seu_obj = st_dat_train,
+        pretrained_model = pretrained_model,
+        sen_len = sen_len,
+        pretrained_model_path = pretrained_model_path,
+        save_checkpoint_path = save_checkpoint_path,
+        batch_size = batch_size,
+        train_K = train_K,
+        train_Q = train_Q,
+        train_episodes = train_episodes,
+        envir_path = envir_path
+    )
 
-Checks if the best practices and the right coding style has been used.
+Use trained TLSformer to predict
 
-    Give an example
-
-## Deployment
-
-Add additional notes to deploy this on a live system
+    # run prediction
+    st_dat_pred <- run_tlsformer_pred(
+                        seu_obj = st_dat_pred,
+                        pretrained_model_path = pretrained_model_path,
+                        save_checkpoint_path = save_checkpoint_path,
+                        envir_path = envir_path,
+                        pretrained_model = pretrained_model,
+                        sen_len=sen_len)
+    # Normalization -- 0-1 scale
+    st_dat_pred$relative_distance <- 1- (st_dat_pred$relative_distance - min(st_dat_pred$relative_distance))/(max(st_dat_pred$relative_distance)-min(st_dat_pred$relative_distance))
+    SpatialFeaturePlot(st_dat_pred,features = c("region","relative_distance"))
 
 ## Built With
   - [Python](https://www.python.org/) 
   - [R](https://www.contributor-covenant.org/](https://www.r-project.org/about.html)) 
-
-## Authors
-
-  - **Xiaokai Fan** - *Member of Jinglab* -
-    [PurpleBooth](https://github.com/PurpleBooth)
 
 ## Lab website
 
