@@ -119,4 +119,4 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
 
 ## Lab website
 
-  - **YingJing Lab** - *Guangzhou, China* - (https://www.yingjinglab.com)
+  - **YingJing Lab** - *Guangzhou, China* - https://www.yingjinglab.com
