@@ -14,7 +14,7 @@ This is a mini example shows how to use TLSformer to predict TLS.
 
 Before you use TLSformer, you can firstly create a conda environment.
 
-Using yaml file to create TLSformer conda environment
+Using [yaml file](https://github.com/Jinglab/TLSformer/blob/main/tlsformer_env.yml) to create TLSformer conda environment
 
     conda env create -f tlsformer_env.yml
 
