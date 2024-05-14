@@ -22,7 +22,7 @@ And after successfully creating the environment, you can find the python of this
 
     /home/xfan/miniconda3/envs/TLSformer_env/bin/python
 
-This path will be the finally used python environment path, and then download the 10x Visium breast cancer pre-trained gene word encoder and demo data in the Google Cloud. The saved path of this pre-train gene word encoder will be used in the next work flow.
+This path will be the finally used python environment path, and then download the 10x Visium breast cancer pre-trained gene word encoder and demo data in the Google Cloud. The saved path of this pre-trained gene word encoder will be used in the next work flow.
 - [pre-trained gene word encoder](https://drive.google.com/drive/folders/1qLsl22T3IU2EEyXYM3z52_8MLNsFDyjO?usp=drive_link)
 - [demo data](https://drive.google.com/drive/folders/1DZJ-f_RjpnRUszXNKm_KRGXpbHcwsEBK?usp=drive_link)
 
