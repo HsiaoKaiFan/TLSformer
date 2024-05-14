@@ -50,14 +50,14 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
     sen_len = 260
     save_inseu = TRUE
     genes_representor = "~/MLTLS_package/demo_data/pretrained_models_rank260/genelist.txt"
-    envir_path = "/home/xfan/miniconda3/envs/tlsformer_env/bin/python"
+    envir_path = "/home/xfan/miniconda3/envs/TLSformer_env/bin/python"
     pretrained_model = "TLSformer_BERT"
     pretrained_model_path = "~/MLTLS_package/demo_data/pretrained_models_rank260/"
     save_checkpoint_path = "~/MLTLS_package/demo_data/"
-    batch_size = 2
-    train_K = 5
-    train_Q = 5
-    train_episodes = 300
+    batch_size = 1
+    train_K = 2
+    train_Q = 2
+    train_episodes = 600
 
 3.Generate sentences
     
