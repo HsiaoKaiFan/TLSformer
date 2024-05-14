@@ -30,11 +30,10 @@ Install TLSformer by devtools in R
 
     devtools::install_github("Jinglab/TLSformer")
     
-Or install locally by download this repository after unzip the downloaded file
+Or by download TLSformer_1.0.tar.gz in this repository and install locally
 
-    devtools::install_github("Jinglab/TLSformer")
+    install.packages("~/MLTLS_package/TLSformer_1.0.tar.gz")
     
-
 ### Run TLSformer 
 
 Load package and demo data
