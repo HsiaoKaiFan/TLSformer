@@ -12,7 +12,7 @@ This is a mini example shows how to use TLSformer to predict TLS.
 
 ### Installing
 
-Before you use TLSformer, you can firstly prepare a conda environment.
+Before you use TLSformer, you can firstly create a conda environment.
 
 Using yaml file to create TLSformer conda environment
 
@@ -20,17 +20,17 @@ Using yaml file to create TLSformer conda environment
 
 And after successfully creating the environment, you can find the python of this environment like in this path
 
-    /home/xfan/miniconda3/envs/TLSformer_env/bin
+    /home/xfan/miniconda3/envs/TLSformer_env/bin/python
 
 This path will be the finally used python environment path, and then download the 10x Visium breast cancer pre-trained gene word encoder and demo data in the Google Cloud. The saved path of this pre-train gene word encoder will be used in the next work flow.
-- [pre-trained gene word encoder]()
+- [pre-trained gene word encoder](https://drive.google.com/drive/folders/1qLsl22T3IU2EEyXYM3z52_8MLNsFDyjO?usp=drive_link)
 - [demo data](https://drive.google.com/drive/folders/1DZJ-f_RjpnRUszXNKm_KRGXpbHcwsEBK?usp=drive_link)
 
 Install TLSformer by devtools in R
 
     devtools::install_github("Jinglab/TLSformer")
     
-Or by download TLSformer_1.0.tar.gz in this repository and install locally
+Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Jinglab/TLSformer/blob/main/TLSformer_1.0.tar.gz) file from this GitHub repository and install it locally.
 
     install.packages("~/MLTLS_package/TLSformer_1.0.tar.gz")
     
@@ -59,7 +59,7 @@ Generate sentences
     train_Q = 5
     train_episodes = 300
     
-    # train data
+    # training data
     st_dat_train <- generate_sentences(
       seu_obj = st_dat_train,
       sen_len = sen_len,
