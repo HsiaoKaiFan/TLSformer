@@ -42,7 +42,7 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
     library(TLSformer)
     library(reticulate)
     library(tidyverse)
-    st_dat_train <- readRDS("~/MLTLS_package/demo_data/bc_st_demo_data.RDS")
+    st_dat_train <- readRDS("~/MLTLS_package/demo_data/bc_st_demo_data.rds")
     st_dat_pred <- readRDS("~/MLTLS_package/demo_data/melanoma_st_demo_data.rds")
 
 2.Set parameters
