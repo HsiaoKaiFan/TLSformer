@@ -1,40 +1,41 @@
-# TLSformer
+# TLSformer v1.0.0 </a>
 
-TLSformer is an R package that can assist immune researchers in identifying which cells/spots belong to TLS regions or in determining the relative distance between TLS and non-TLS regions for cells/spots. It achieves this through using spatial transcriptomics data to predict single-cell RNA-seq data or other spatial transcriptomics data. TLSformer has advantages in that it does not require a large amount of training data and can perform zero-shot TLS prediction for new data from cancer types it was not directly trained on.
+### Xiaokai Fan<sup></sup>,  Mei Xie<sup></sup>, Xinying Xue*, Xiaohui Fan*
 
-If you want to deep into the TLSformer you can find the manuscript in XXX and we also deposit a tutorial in the XXX.
-- [Manuscript](https://www.example.com)
-- [Tutorial](https://www.example.com)
+TLSformer is a computational tool that can assist immune researchers for identifying which TLS cells/spots or calculate determining the probability of a cell/spot belong to TLS regions. Different from previous methods, TLSformer leverages bidirectional encoder representation from transformer (BERT) and meta-learning to acquire general knowledge from the limited available TLS-related information. This knowledge is then transferred to identify single cells or spots within TLS regions from scRNA-seq data or spatial transcriptomics data. 
 
-## Getting Started
+## Requirements and Installation
+This toolkit is written in both R and Python programming languages. The core BERT and meta-learning algorithm are implemented in Python, while the initial data preparation and functions usage are written in R.
 
-This is a mini example shows how to use TLSformer to predict TLS.
+### Installation of TLSformer
 
-### Installing
-
-Before you use TLSformer, you can firstly create a conda environment.
+To use TLSformer, firstly create a conda environment.
 
 Using [yaml file](https://github.com/Jinglab/TLSformer/blob/main/tlsformer_env.yml) to create TLSformer conda environment
 
     conda env create -f tlsformer_env.yml
 
-And after successfully creating the environment, you can find the python of this environment like in this path
+After successfully creating the environment, the python path of this environment can be found like this
 
     /home/xfan/miniconda3/envs/TLSformer_env/bin/python
 
-This path will be the finally used python environment path, and then download the 10x Visium breast cancer pre-trained gene word encoder and demo data in the Google cloud. The saved location of this pre-trained encoder will be utilized in the following workflow steps.
+This path will be the finally used python environment path, and then download the 10x Visium breast cancer pre-trained BERT and demo data in the Google cloud. The saved location of this pre-trained BERT will be utilized in the following workflow steps.
 - [breast cancer pre-trained gene word encoder](https://drive.google.com/drive/folders/1qLsl22T3IU2EEyXYM3z52_8MLNsFDyjO?usp=drive_link)
 - [demo data](https://drive.google.com/drive/folders/1DZJ-f_RjpnRUszXNKm_KRGXpbHcwsEBK?usp=drive_link)
 
 Install TLSformer by devtools in R
+[![R >4.0](https://img.shields.io/badge/R-%3E%3D4.0-brightgreen)](https://www.r-project.org/)
 
     devtools::install_github("Jinglab/TLSformer")
     
 Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Jinglab/TLSformer/blob/main/TLSformer_1.0.tar.gz) file from this GitHub repository and install it locally.
 
-    install.packages("~/MLTLS_package/TLSformer_1.0.tar.gz")
-    
+    install.packages("home/xfan/MLTLS_package/TLSformer_1.0.tar.gz")
+
+## Quick Start
+
 ### Run TLSformer 
+To use TLSformer, we require formatted `.csv` files as input (i.e. read in by pandas). 
 
 1.Load package and demo data
 
