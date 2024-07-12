@@ -15,14 +15,10 @@ To use TLSformer, first use the [yaml file](https://github.com/Jinglab/TLSformer
 
     conda env create -f tlsformer_env.yml
 
-After successfully creating the environment, the Python path of this environment can be found like this
+After successfully creating the environment, the Python path of this environment can be found like this, which will be used in subsequent workflow steps.
 
     /home/xfan/miniconda3/envs/TLSformer_env/bin/python
-
-This path will be the Python environment path used. Next, download the 10x Visium breast cancer pre-trained BERT and demo data from Google Cloud. The saved location of this pre-trained BERT will be utilized in the subsequent workflow steps.
-- [breast cancer pre-trained gene word encoder](https://drive.google.com/drive/folders/1qLsl22T3IU2EEyXYM3z52_8MLNsFDyjO?usp=drive_link)
-- [demo data](https://drive.google.com/drive/folders/1DZJ-f_RjpnRUszXNKm_KRGXpbHcwsEBK?usp=drive_link)
-
+    
 Install TLSformer by devtools in R
 [![R >4.0](https://img.shields.io/badge/R-%3E%3D4.0-brightgreen)](https://www.r-project.org/)
 
@@ -36,8 +32,12 @@ Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Ji
 
 ### Run TLSformer under a TLS knowledge transfer scenario
 To use TLSformer, no complex preprocessing is needed; we only require the counts from a Seurat object as input.
+Download the 10x Visium breast cancer pre-trained BERT and demo data from Google Cloud. The saved location of this pre-trained BERT will be utilized in the subsequent workflow steps.
+- [breast cancer pre-trained gene word encoder](https://drive.google.com/drive/folders/1qLsl22T3IU2EEyXYM3z52_8MLNsFDyjO?usp=drive_link)
+- [demo data](https://drive.google.com/drive/folders/1DZJ-f_RjpnRUszXNKm_KRGXpbHcwsEBK?usp=drive_link)
 
-1. Load package and demo data
+
+1.Load package and demo data
 
     library(Seurat)
     library(TLSformer)
@@ -46,7 +46,7 @@ To use TLSformer, no complex preprocessing is needed; we only require the counts
     st_dat_train <- readRDS("home/xfan/MLTLS_package/demo_data/bc_st_demo_data.rds")
     st_dat_pred <- readRDS("home/xfan/MLTLS_package/demo_data/melanoma_st_demo_data.rds")
 
-2. Set parameters
+2.Set parameters
 
     sen_len = 260
     save_inseu = TRUE
@@ -60,7 +60,7 @@ To use TLSformer, no complex preprocessing is needed; we only require the counts
     train_Q = 2 # depend on your GPU memory to change
     train_episodes = 600
 
-3. Generate sentences
+3.Generate sentences
     
     # Training data
     st_dat_train <- generate_sentences(
@@ -82,7 +82,7 @@ To use TLSformer, no complex preprocessing is needed; we only require the counts
       envir_path = envir_path
     )
 
-4. Training TLSformer
+4.Training TLSformer
     
     # Training
     st_dat_train <- run_tlsformer_train(
@@ -98,7 +98,7 @@ To use TLSformer, no complex preprocessing is needed; we only require the counts
         envir_path = envir_path
     )
 
-5. Use trained TLSformer to predict
+5.Use trained TLSformer to predict
 
     # Prediction
     st_dat_pred <- run_tlsformer_pred(
