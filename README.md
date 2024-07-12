@@ -1,25 +1,25 @@
 # TLSformer v1.0.0 </a>
 
-### Xiaokai Fan<sup></sup>,  Mei Xie<sup></sup>, Xinying Xue*, Xiaohui Fan*
+# TLSformer: a scalable method for identifying individual cells in tertiary lymphoid structures by knowledge transfer of spatial transcriptomic data
 
-TLSformer is a computational tool that can assist immune researchers for identifying which TLS cells/spots or calculate determining the probability of a cell/spot belong to TLS regions. Different from previous methods, TLSformer leverages bidirectional encoder representation from transformer (BERT) and meta-learning to acquire general knowledge from the limited available TLS-related information. This knowledge is then transferred to identify single cells or spots within TLS regions from scRNA-seq data or spatial transcriptomics data. 
+### Xiaokai Fan<sup></sup>,  Mei Xie<sup></sup>, Xinying Xue*, Ying Jing*
+
+TLSformer is a computational tool designed to assist immune researchers in identifying TLS cells/spots and calculating the probability that a cell/spot belongs to TLS regions. Unlike previous methods, TLSformer leverages bidirectional encoder representation from transformers (BERT) and meta-learning to acquire general knowledge from the limited available TLS-related information. This knowledge is then transferred to identify single cells or spots within TLS regions from scRNA-seq or spatial transcriptomics data.
 
 ## Requirements and Installation
-This toolkit is written in both R and Python programming languages. The core BERT and meta-learning algorithm are implemented in Python, while the initial data preparation and functions usage are written in R.
+This toolkit is written in both R and Python programming languages. The core BERT and meta-learning algorithm are implemented in Python, while the initial data preparation and functional usage are written in R.
 
 ### Installation of TLSformer
 
-To use TLSformer, firstly create a conda environment.
-
-Using [yaml file](https://github.com/Jinglab/TLSformer/blob/main/tlsformer_env.yml) to create TLSformer conda environment
+To use TLSformer, first use the [yaml file](https://github.com/Jinglab/TLSformer/blob/main/tlsformer_env.yml) to create TLSformer Conda environment.
 
     conda env create -f tlsformer_env.yml
 
-After successfully creating the environment, the python path of this environment can be found like this
+After successfully creating the environment, the Python path of this environment can be found like this
 
     /home/xfan/miniconda3/envs/TLSformer_env/bin/python
 
-This path will be the finally used python environment path, and then download the 10x Visium breast cancer pre-trained BERT and demo data in the Google cloud. The saved location of this pre-trained BERT will be utilized in the following workflow steps.
+This path will be the Python environment path used. Next, download the 10x Visium breast cancer pre-trained BERT and demo data from Google Cloud. The saved location of this pre-trained BERT will be utilized in the subsequent workflow steps.
 - [breast cancer pre-trained gene word encoder](https://drive.google.com/drive/folders/1qLsl22T3IU2EEyXYM3z52_8MLNsFDyjO?usp=drive_link)
 - [demo data](https://drive.google.com/drive/folders/1DZJ-f_RjpnRUszXNKm_KRGXpbHcwsEBK?usp=drive_link)
 
@@ -28,39 +28,39 @@ Install TLSformer by devtools in R
 
     devtools::install_github("Jinglab/TLSformer")
     
-Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Jinglab/TLSformer/blob/main/TLSformer_1.0.tar.gz) file from this GitHub repository and install it locally.
+Alternatively, you can download the [TLSformer_1.0.tar.gz](https://github.com/Jinglab/TLSformer/blob/main/TLSformer_1.0.tar.gz) package file from this GitHub repository and install it locally.
 
     install.packages("home/xfan/MLTLS_package/TLSformer_1.0.tar.gz")
 
 ## Quick Start
 
-### Run TLSformer 
-To use TLSformer, we require formatted `.csv` files as input (i.e. read in by pandas). 
+### Run TLSformer under a TLS knowledge transfer scenario
+To use TLSformer, no complex preprocessing is needed; we only require the counts from a Seurat object as input.
 
-1.Load package and demo data
+1. Load package and demo data
 
     library(Seurat)
     library(TLSformer)
     library(reticulate)
     library(tidyverse)
-    st_dat_train <- readRDS("~/MLTLS_package/demo_data/bc_st_demo_data.rds")
-    st_dat_pred <- readRDS("~/MLTLS_package/demo_data/melanoma_st_demo_data.rds")
+    st_dat_train <- readRDS("home/xfan/MLTLS_package/demo_data/bc_st_demo_data.rds")
+    st_dat_pred <- readRDS("home/xfan/MLTLS_package/demo_data/melanoma_st_demo_data.rds")
 
-2.Set parameters
+2. Set parameters
 
     sen_len = 260
     save_inseu = TRUE
-    genes_representor = "~/MLTLS_package/demo_data/pretrained_models_rank260/genelist.txt"
+    genes_representor = "home/xfan/MLTLS_package/demo_data/pretrained_models_rank260/genelist.txt"
     envir_path = "/home/xfan/miniconda3/envs/TLSformer_env/bin/python"
     pretrained_model = "TLSformer_BERT"
-    pretrained_model_path = "~/MLTLS_package/demo_data/pretrained_models_rank260/"
-    save_checkpoint_path = "~/MLTLS_package/demo_data/"
-    batch_size = 1
-    train_K = 2
-    train_Q = 2
+    pretrained_model_path = "home/xfan/MLTLS_package/demo_data/pretrained_models_rank260/"
+    save_checkpoint_path = "home/xfan/MLTLS_package/demo_data/"
+    batch_size = 1 # depend on your GPU memory to change
+    train_K = 2 # depend on your GPU memory to change
+    train_Q = 2 # depend on your GPU memory to change
     train_episodes = 600
 
-3.Generate sentences
+3. Generate sentences
     
     # Training data
     st_dat_train <- generate_sentences(
@@ -82,7 +82,7 @@ To use TLSformer, we require formatted `.csv` files as input (i.e. read in by pa
       envir_path = envir_path
     )
 
-4.Training TLSformer
+4. Training TLSformer
     
     # Training
     st_dat_train <- run_tlsformer_train(
@@ -98,7 +98,7 @@ To use TLSformer, we require formatted `.csv` files as input (i.e. read in by pa
         envir_path = envir_path
     )
 
-5.Use trained TLSformer to predict
+5. Use trained TLSformer to predict
 
     # Prediction
     st_dat_pred <- run_tlsformer_pred(
