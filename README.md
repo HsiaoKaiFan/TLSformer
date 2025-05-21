@@ -1,8 +1,4 @@
-# TLSformer v1.0.0 </a>
-
-# TLSformer: a scalable method for identifying individual cells in tertiary lymphoid structures by knowledge transfer of spatial transcriptomic data
-
-### Xiaokai Fan<sup></sup>,  Mei Xie<sup></sup>, Xinying Xue*, Ying Jing*
+# TLSformer </a>
 
 TLSformer is a computational tool designed to assist immune researchers in identifying TLS cells/spots and calculating the probability that a cell/spot belongs to TLS regions. Unlike previous methods, TLSformer leverages bidirectional encoder representation from transformers (BERT) and meta-learning to acquire general knowledge from the limited available TLS-related information. This knowledge is then transferred to identify single cells or spots within TLS regions from scRNA-seq or spatial transcriptomics data.
 
