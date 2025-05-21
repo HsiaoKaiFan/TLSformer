@@ -1,8 +1,8 @@
 # TLSformer v1.0.0 </a>
 
-# TLSformer: a scalable method for identifying individual cells in tertiary lymphoid structures by knowledge transfer of spatial transcriptomic data
+# Cell-resolved analysis of spatially organized cellular architecture using transformer models
 
-### Xiaokai Fan<sup></sup>,  Mei Xie<sup></sup>, Xinying Xue*, Ying Jing*
+### Xiaokai Fan<sup></sup>,  Mei Xie<sup></sup>, Jun Zhang, Ying Wei, Xidong Ma, Jie Yao, Xuwen Lin, Xin Zhang, Xinyu Bao, Yiran Liang, Xinying Xue*, Ying Jing*
 
 TLSformer is a computational tool designed to assist immune researchers in identifying TLS cells/spots and calculating the probability that a cell/spot belongs to TLS regions. Unlike previous methods, TLSformer leverages bidirectional encoder representation from transformers (BERT) and meta-learning to acquire general knowledge from the limited available TLS-related information. This knowledge is then transferred to identify single cells or spots within TLS regions from scRNA-seq or spatial transcriptomics data.
 
@@ -72,7 +72,7 @@ Download the 10x Visium breast cancer pre-trained BERT and demo data from Google
       envir_path = envir_path
     )
     
-    # Predicton data
+    # Prediction data
     st_dat_pred <- generate_sentences(
       seu_obj = st_dat_pred,
       sen_len = sen_len,
